@@ -1,26 +1,12 @@
-import { Imagem, Titulo, Precos } from './styles'
+import { Imagem, Tipo, Titulo } from './styles'
 
-import Tag from '../Tag'
-import Button from '../Button'
+import macarrao from '../../images/macarrao-banner.png'
 
 const Banner = () => (
-  <Imagem style={{ backgroundImage: `url()` }}>
+  <Imagem style={{ backgroundImage: `url(${macarrao})` }}>
     <div className="container">
-      <Tag>Destaque do dia</Tag>
-      <div>
-        <Titulo>Marvel&apos;s Spider-Man: Miles Morales PS4 & PS5</Titulo>
-        <Precos>
-          De <span>R$ 250,00</span> <br />
-          por apenas R$ 99,90
-        </Precos>
-      </div>
-      <Button
-        type="link"
-        to="/produto"
-        title="Clique aqui para aproveitar esta oferta"
-      >
-        Aproveitar
-      </Button>
+      <Tipo>Italiana</Tipo>
+      <Titulo>La Dolce Vita Trattoria</Titulo>
     </div>
   </Imagem>
 )

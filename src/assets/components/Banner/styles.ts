@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { TagContainer } from '../Tag/styles'
+import { cores } from '../../../styles'
 
 export const Imagem = styled.div`
-  width: 100%;
-  height: 560px;
+  width: auto;
+  height: 280px;
   display: block;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,21 +11,25 @@ export const Imagem = styled.div`
 
   .container {
     position: relative;
-    padding-top: 340px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  ${TagContainer} {
-    position: absolute;
-    top: 32px;
+    flex-direction: column;
   }
 `
 
 export const Titulo = styled.h2`
-  font-size: 36px;
+  font-size: 32px;
   max-width: 450px;
+  color: ${cores.branca};
+`
+
+export const Tipo = styled.h2`
+  font-size: 32px;
+  max-width: 450px;
+  color: ${cores.branca};
+  font-weight: 100;
+  margin-top: 24px;
+  margin-bottom: 132px;
 `
 
 export const Precos = styled.p`

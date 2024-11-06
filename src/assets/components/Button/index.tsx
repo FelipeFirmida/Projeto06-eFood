@@ -10,6 +10,7 @@ type Props = {
 
 const Button = ({ type, title, to, onClick, children }: Props) => {
   if (type === 'button') {
+    children = 'Adicionar ao Carrinho'
     return (
       <ButtonContainer type="button" title={title} onClick={onClick}>
         {children}
@@ -17,8 +18,9 @@ const Button = ({ type, title, to, onClick, children }: Props) => {
     )
   }
 
+  children = 'Saiba mais'
   return (
-    <ButtonLink to={to as string} title={title}>
+    <ButtonLink to="/categories" title={title}>
       {children}
     </ButtonLink>
   )

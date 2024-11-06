@@ -3,6 +3,7 @@ import Tag from '../Tag'
 import { Card, Descricao, Titulo, Nota, Titulos, TagHigh } from './styles'
 
 import estrela from '../../images/estrela.png'
+import Button from '../Button'
 
 type Props = {
   title: string
@@ -32,6 +33,9 @@ const Product = ({
     {highlight && <TagHigh>{highlight}</TagHigh>}
     <Tag>{category}</Tag>
     <Descricao>{description}</Descricao>
+    <Button type="link" title={title}>
+      Saiba mais
+    </Button>
   </Card>
 )
 

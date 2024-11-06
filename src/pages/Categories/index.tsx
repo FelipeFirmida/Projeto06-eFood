@@ -1,9 +1,14 @@
-import ProductsList from '../../assets/components/ProductsList'
-import Game from '../Home/models/Game'
+import Restaurant from './models/Restaurant'
+import Pratos from './models/Pratos'
 
 import hioki from '../../assets/images/sushi.png'
+import PratosList from '../../assets/components/PratosList'
+import Banner from '../../assets/components/Banner'
+import pizza from '../../assets/images/pizza.png'
+import { HeaderCarrinho } from '../../assets/components/HeaderCarrinho/styles'
+import HeaderCart from '../../assets/components/HeaderCarrinho'
 
-const restaurantes: Game[] = [
+const restaurantes: Restaurant[] = [
   {
     id: 1,
     category: 'Japonesa',
@@ -61,9 +66,62 @@ const restaurantes: Game[] = [
   }
 ]
 
+const pratos: Pratos[] = [
+  {
+    id: 1,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: pizza,
+    resturantId: 2
+  },
+  {
+    id: 2,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: pizza,
+    resturantId: 2
+  },
+  {
+    id: 3,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: pizza,
+    resturantId: 2
+  },
+  {
+    id: 4,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: pizza,
+    resturantId: 2
+  },
+  {
+    id: 5,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: pizza,
+    resturantId: 2
+  },
+  {
+    id: 6,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: pizza,
+    resturantId: 2
+  }
+]
+
 const Categories = () => (
   <>
-    <ProductsList games={restaurantes} />
+    <HeaderCart></HeaderCart>
+    <Banner />
+    <PratosList pratos={pratos} />
   </>
 )
 

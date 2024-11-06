@@ -3,6 +3,7 @@ import Game from '../Home/models/Game'
 
 import hioki from '../../assets/images/sushi.png'
 import vita from '../../assets/images/macarrao.png'
+import Header from '../../assets/components/Header'
 
 const restaurantes: Game[] = [
   {
@@ -64,6 +65,7 @@ const restaurantes: Game[] = [
 
 const Home = () => (
   <>
+    <Header></Header>
     <ProductsList games={restaurantes} />
   </>
 )
