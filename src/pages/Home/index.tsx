@@ -5,6 +5,10 @@ import hioki from '../../assets/images/sushi.png'
 import vita from '../../assets/images/macarrao.png'
 import Header from '../../assets/components/Header'
 
+export interface PratoItem {
+  url: string
+}
+
 const restaurantes: Game[] = [
   {
     id: 1,

@@ -23,3 +23,84 @@ export const Title = styled.h2`
   font-size: 18px;
   font-weight: bold;
 `
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  &.visible {
+    display: flex;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    content: '';
+  }
+`
+
+export const ModalContent = styled.div`
+  max-width: 1024px;
+  position: relative;
+  z-index: 1;
+  background-color: ${cores.vermelho};
+  display: flex;
+
+  header {
+    > img {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      cursor: pointer;
+    }
+  }
+
+  > img {
+    width: 280px;
+    height: 280px;
+    margin: 32px 24px 32px 32px;
+    object-fit: fill;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 32px;
+    margin-left: 0;
+    width: auto;
+
+    h4 {
+      font-size: 18px;
+      font-weight: 900;
+      color: ${cores.branca};
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      color: ${cores.branca};
+      margin-bottom: 16px;
+    }
+
+    button {
+      display: inline-flex;
+      white-space: nowrap;
+      width: auto;
+      padding: 4px 7px;
+    }
+  }
+`
