@@ -1,42 +1,38 @@
 import Tag from '../Tag'
-
+import { Restaurante } from '../../../pages/Home'
 import { Card, Descricao, Titulo, Nota, Titulos, TagHigh } from './styles'
 
 import estrela from '../../images/estrela.png'
 import Button from '../Button'
 
-type Props = {
-  title: string
-  category: string
-  score: number
-  description: string
-  image: string
-  highlight?: string
-}
+type Props = Restaurante
 
 const Product = ({
-  title,
-  category,
-  score,
-  description,
-  highlight,
-  image
-}: Props) => (
-  <Card>
-    <img src={image} alt={title} />
-    <Titulos>
-      <Titulo>{title}</Titulo>
-      <Nota>
-        {score} <img src={estrela} alt="Estrela" />
-      </Nota>
-    </Titulos>
-    {highlight && <TagHigh>{highlight}</TagHigh>}
-    <Tag>{category}</Tag>
-    <Descricao>{description}</Descricao>
-    <Button type="link" title={title}>
-      Saiba mais
-    </Button>
-  </Card>
-)
+  id,
+  titulo,
+  tipo,
+  avaliacao,
+  descricao,
+  destacado,
+  capa
+}: Props) => {
+  return (
+    <Card>
+      <img src={capa} alt={titulo} />
+      <Titulos>
+        <Titulo>{titulo}</Titulo>
+        <Nota>
+          {avaliacao} <img src={estrela} alt="Estrela" />
+        </Nota>
+      </Titulos>
+      {destacado && <TagHigh>{destacado}</TagHigh>}
+      <Tag>{tipo}</Tag>
+      <Descricao>{descricao}</Descricao>
+      <Button type="link" to={`restaurante/${id}`} title={titulo}>
+        Saiba mais
+      </Button>
+    </Card>
+  )
+}
 
 export default Product

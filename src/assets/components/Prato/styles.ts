@@ -8,6 +8,10 @@ export const Card = styled.div`
   padding: 8px;
   position: relative;
   margin-bottom: 48px;
+  > img {
+    width: 100%;
+    aspect-ratio: 1.82 / 1;
+  }
 `
 
 export const Titulo = styled.h3`

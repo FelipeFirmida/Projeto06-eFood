@@ -1,21 +1,19 @@
-import Pratos from '../../../pages/Categories/models/Pratos'
+import { useState } from 'react'
+
+import { PratoItem } from '../../../pages/Home'
 import Prato from '../Prato'
 import { Container, List, Modal, ModalContent } from './styles'
 
 import close from '../../images/close.png'
-import pizza from '../../images/pizza.png'
 import Button from '../Button'
-import { useState } from 'react'
 
 export type Props = {
-  pratos: Pratos[]
+  pratos: PratoItem[]
 }
 
 interface ModalState {
   isVisible: boolean
-  title?: string
-  description?: string
-  image?: string
+  prato?: PratoItem
 }
 
 const PratosList = ({ pratos }: Props) => {
@@ -23,12 +21,10 @@ const PratosList = ({ pratos }: Props) => {
     isVisible: false
   })
 
-  const openModal = (prato: Pratos) => {
+  const openModal = (prato: PratoItem) => {
     setModal({
       isVisible: true,
-      title: prato.title,
-      description: prato.description,
-      image: prato.image
+      prato: prato
     })
   }
 
@@ -36,6 +32,13 @@ const PratosList = ({ pratos }: Props) => {
     setModal({
       isVisible: false
     })
+  }
+
+  const formataPreco = (preco = 0) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(preco)
   }
 
   return (
@@ -46,9 +49,11 @@ const PratosList = ({ pratos }: Props) => {
             {pratos.map((prato) => (
               <Prato
                 key={prato.id}
-                description={prato.description}
-                image={prato.image}
-                title={prato.title}
+                description={prato.descricao}
+                image={prato.foto}
+                title={prato.nome}
+                porcao={prato.porcao}
+                preco={formataPreco(prato.preco)}
                 onClick={() => openModal(prato)}
               />
             ))}
@@ -56,8 +61,8 @@ const PratosList = ({ pratos }: Props) => {
         </div>
       </Container>
 
-      {modal.isVisible && (
-        <Modal>
+      {modal.prato && (
+        <Modal className={modal.isVisible ? 'visible' : ''}>
           <ModalContent>
             <header>
               <img
@@ -68,25 +73,16 @@ const PratosList = ({ pratos }: Props) => {
                 }}
               />
             </header>
-            <img src={pizza} />
+            <img src={modal.prato.foto} />
             <div className="content">
-              <h4>Pizza Marguerita</h4>
-              <p>
-                A pizza Margherita é uma pizza clássica da culinária italiana,
-                reconhecida por sua simplicidade e sabor inigualável. Ela é
-                feita com uma base de massa fina e crocante, coberta com molho
-                de tomate fresco, queijo mussarela de alta qualidade, manjericão
-                fresco e azeite de oliva extra-virgem. A combinação de sabores é
-                perfeita, com o molho de tomate suculento e ligeiramente ácido,
-                o queijo derretido e cremoso e as folhas de manjericão frescas,
-                que adicionam um toque de sabor herbáceo. É uma pizza simples,
-                mas deliciosa, que agrada a todos os paladares e é uma ótima
-                opção para qualquer ocasião.
-                <br />
-                <br />
-                Serve: de 2 a 3 pessoas
-              </p>
-              <Button type="cart" title="wat"></Button>
+              <h4>{modal.prato.nome}</h4>
+              <p>{modal.prato.descricao}</p>
+              <p>Serve de {modal.prato.porcao}</p>
+              <Button
+                preco={formataPreco(modal.prato.preco)}
+                type="cart"
+                title="Teste"
+              ></Button>
             </div>
           </ModalContent>
           <div className="overlay" onClick={closeModal}></div>

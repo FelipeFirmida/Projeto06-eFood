@@ -101,6 +101,7 @@ export const ModalContent = styled.div`
       white-space: nowrap;
       width: auto;
       padding: 4px 7px;
+      cursor: pointer;
     }
   }
 `
