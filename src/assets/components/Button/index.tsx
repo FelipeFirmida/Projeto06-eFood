@@ -1,7 +1,7 @@
 import { ButtonContainer, ButtonLink } from './style'
 
 type Props = {
-  type: 'button' | 'link' | 'cart'
+  type: 'button' | 'link' | 'cart' | 'deliver'
   title: string
   preco?: string
   to?: string
@@ -11,7 +11,6 @@ type Props = {
 
 const Button = ({ type, title, preco, to, onClick, children }: Props) => {
   if (type === 'button') {
-    children = 'Mais detalhes'
     return (
       <ButtonContainer type="button" title={title} onClick={onClick}>
         {children}
@@ -21,6 +20,15 @@ const Button = ({ type, title, preco, to, onClick, children }: Props) => {
 
   if (type === 'cart') {
     children = `Adicionar ao carrinho - ${preco}`
+    return (
+      <ButtonContainer title={children} onClick={onClick}>
+        {children}
+      </ButtonContainer>
+    )
+  }
+
+  if (type === 'deliver') {
+    children = `Continuar com a entrega`
     return (
       <ButtonContainer title={children} onClick={onClick}>
         {children}

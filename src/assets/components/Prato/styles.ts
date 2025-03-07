@@ -7,6 +7,7 @@ export const Card = styled.div`
   border: 1px solid #e66767;
   padding: 8px;
   position: relative;
+  border-radius: 8px;
   margin-bottom: 48px;
   > img {
     width: 100%;

@@ -7,7 +7,7 @@ const Header = () => (
   <HeaderBar>
     <div>
       <Link to="/">
-        <img src={logo} alt="EPLAY" />
+        <img src={logo} alt="Efood" />
       </Link>
       <h2>
         Viva experiências gastronômicas <br />

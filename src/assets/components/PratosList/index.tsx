@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { PratoItem } from '../../../pages/Home'
 import Prato from '../Prato'
@@ -6,6 +7,7 @@ import { Container, List, Modal, ModalContent } from './styles'
 
 import close from '../../images/close.png'
 import Button from '../Button'
+import { add, open } from '../../../store/reducers/cart'
 
 export type Props = {
   pratos: PratoItem[]
@@ -14,6 +16,13 @@ export type Props = {
 interface ModalState {
   isVisible: boolean
   prato?: PratoItem
+}
+
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
 }
 
 const PratosList = ({ pratos }: Props) => {
@@ -34,11 +43,11 @@ const PratosList = ({ pratos }: Props) => {
     })
   }
 
-  const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
+  const dispatch = useDispatch()
+
+  const addToCart = (prato: PratoItem) => {
+    dispatch(add(prato))
+    dispatch(open())
   }
 
   return (
@@ -81,7 +90,8 @@ const PratosList = ({ pratos }: Props) => {
               <Button
                 preco={formataPreco(modal.prato.preco)}
                 type="cart"
-                title="Teste"
+                title="Adicionar o produto no carrinho"
+                onClick={() => addToCart(modal.prato!)}
               ></Button>
             </div>
           </ModalContent>

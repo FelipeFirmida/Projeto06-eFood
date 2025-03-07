@@ -8,12 +8,17 @@ export const HeaderCarrinho = styled.header`
   padding: 24px;
   align-items: center;
 
-  h2 {
+  h2,
+  button {
     color: ${cores.vermelho};
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
     text-align: center;
+  }
+
+  h2 {
+    margin-right: 48px;
   }
 
   a {
@@ -30,5 +35,12 @@ export const HeaderCarrinho = styled.header`
     width: 125px;
     height: auto;
     margin: 0 8px;
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    width: auto;
+    padding: 0;
   }
 `

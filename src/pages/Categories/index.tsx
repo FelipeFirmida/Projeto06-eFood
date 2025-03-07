@@ -1,26 +1,22 @@
 import { useEffect, useState } from 'react'
 import { PratoItem } from '../Home'
 import PratosList from '../../assets/components/PratosList'
-import { Restaurante } from '../Home'
 import Banner from '../../assets/components/Banner'
 import HeaderCart from '../../assets/components/HeaderCarrinho'
 import { useParams } from 'react-router-dom'
+import { useGetRestaurantQuery } from '../../services/api'
 
 const Categories = () => {
   const [pratos, setPratos] = useState<PratoItem[]>([])
-  const [restaurante, setRestaurante] = useState<Restaurante | null>(null)
 
   const { id } = useParams<{ id: string }>()
+  const { data: restaurante } = useGetRestaurantQuery(id!)
 
   useEffect(() => {
-    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setRestaurante(res)
-        setPratos(res.cardapio)
-      })
-  }, [id])
-
+    if (restaurante && restaurante.cardapio) {
+      setPratos(restaurante.cardapio)
+    }
+  }, [restaurante])
   if (!restaurante) {
     return <h3>Restaurante não encontrado</h3>
   }
