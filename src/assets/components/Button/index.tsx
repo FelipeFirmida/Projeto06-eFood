@@ -7,6 +7,7 @@ type Props = {
   to?: string
   onClick?: () => void
   children?: string
+  disabled?: boolean
 }
 
 const Button = ({ type, title, preco, to, onClick, children }: Props) => {
@@ -28,7 +29,6 @@ const Button = ({ type, title, preco, to, onClick, children }: Props) => {
   }
 
   if (type === 'deliver') {
-    children = `Continuar com a entrega`
     return (
       <ButtonContainer title={children} onClick={onClick}>
         {children}

@@ -34,6 +34,23 @@ export const Sidebar = styled.aside`
   padding: 32px 8px 0 8px;
   max-width: 360px;
   width: 100%;
+
+  > h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  form {
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  button {
+    margin-bottom: 8px;
+    border: none;
+  }
 `
 
 export const Prices = styled.p`
@@ -86,4 +103,45 @@ export const CartItem = styled.li`
     bottom: 8px;
     right: 8px;
   }
+`
+export const InputCart = styled.input.attrs((props) => ({
+  id: props.id
+}))`
+  height: 32px;
+  width: 100%;
+  display: block;
+  margin: 8px 0;
+  border: none;
+  background-color: ${cores.rosaClaro};
+
+  &[id='cardNumber'] {
+    width: 228px;
+    margin-right: 22px;
+  }
+
+  &[id='cvv'] {
+    margin-left: 0px;
+  }
+
+  &.error {
+    border: 3px solid red;
+  }
+`
+
+export const Row = styled.div`
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-between;
+`
+
+export const EndP = styled.p`
+  margin-bottom: 24px;
+`
+
+export const Warn = styled.p`
+  background-color: ${cores.rosaClaro};
+  color: ${cores.vermelho};
+  font-size: 16px;
+  padding: 8px;
 `
