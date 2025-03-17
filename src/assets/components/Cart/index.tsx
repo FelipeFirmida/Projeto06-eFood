@@ -320,7 +320,7 @@ const Cart = () => {
 
   const renderPayment = () => (
     <>
-      <h2>Pagamento - Valor a pagar R$ 190,90</h2>
+      <h2>Pagamento - Valor a pagar {formataPreco(getTotalPrice())}</h2>
       <form onSubmit={paymentFormik.handleSubmit}>
         <div>
           <label htmlFor="cardName">Nome no cartão</label>
