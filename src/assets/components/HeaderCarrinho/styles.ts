@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../../styles'
+import { breakpoints, cores } from '../../../styles'
 import fundoHome from '../../images/fundo-home.png'
 
 export const HeaderCarrinho = styled.header`
@@ -19,6 +19,10 @@ export const HeaderCarrinho = styled.header`
 
   h2 {
     margin-right: 48px;
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+      flex-direction: column;
+    }
   }
 
   a {
@@ -29,6 +33,10 @@ export const HeaderCarrinho = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: ${breakpoints.tablet}) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   img {

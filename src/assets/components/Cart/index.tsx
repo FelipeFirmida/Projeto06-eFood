@@ -142,11 +142,54 @@ const Cart = () => {
     return hasError
   }
 
+  const handleConfirmation = async () => {
+    const purchasePayload: PurchasePayload = {
+      products: items.map((item) => ({
+        id: item.id,
+        price: item.preco
+      })),
+      delivery: {
+        receiver: deliveryFormik.values.name,
+        adress: {
+          description: deliveryFormik.values.adress,
+          city: deliveryFormik.values.city,
+          zipCode: deliveryFormik.values.cep,
+          number: Number(deliveryFormik.values.number),
+          complement: deliveryFormik.values.comp
+        }
+      },
+      payment: {
+        card: {
+          name: paymentFormik.values.cardName,
+          number: paymentFormik.values.cardNumber,
+          code: Number(paymentFormik.values.cvv),
+          expires: {
+            month: Number(paymentFormik.values.month),
+            year: Number(paymentFormik.values.year)
+          }
+        }
+      }
+    }
+
+    try {
+      await purchase(purchasePayload).unwrap()
+      setCurrentStep('end')
+    } catch (error) {
+      console.error('Failed to submit purchase:', error)
+    }
+  }
+
+  const endCart = () => {
+    alert('Compra confirmada! Obrigado pela preferência!')
+    closeCart()
+    setCurrentStep('cart')
+  }
+
   const renderCart = () => (
     <>
       {items.length === 0 && (
         <Warn style={{ color: 'red', textAlign: 'center' }}>
-          O carrinho está vazio. Adicione itens para continuar.
+          O carrinho está vazio. Adicione 1 ou mais itens para continuar.
         </Warn>
       )}
       <ul>
@@ -266,7 +309,7 @@ const Cart = () => {
         Continuar com o pagamento
       </Button>
       <Button
-        onClick={() => setCurrentStep('cart')}
+        onClick={() => setCurrentStep('delivery')}
         type="deliver"
         title="Voltar para o carrinho"
       >
@@ -349,7 +392,7 @@ const Cart = () => {
         onClick={async () => {
           await paymentFormik.validateForm() // Trigger validation
           if (paymentFormik.isValid && paymentFormik.dirty) {
-            setCurrentStep('end')
+            handleConfirmation()
           }
         }}
         type="deliver"
@@ -359,7 +402,7 @@ const Cart = () => {
         Finalizar com o pagamento
       </Button>
       <Button
-        onClick={() => setCurrentStep('delivery')}
+        onClick={() => setCurrentStep('cart')}
         type="deliver"
         title="Voltar para a edição do endereço"
       >
@@ -368,70 +411,36 @@ const Cart = () => {
     </>
   )
 
-  const handleConfirmation = async () => {
-    const purchasePayload: PurchasePayload = {
-      products: items.map((item) => ({
-        id: item.id,
-        price: item.preco
-      })),
-      delivery: {
-        receiver: deliveryFormik.values.name,
-        adress: {
-          description: deliveryFormik.values.adress,
-          city: deliveryFormik.values.city,
-          zipCode: deliveryFormik.values.cep,
-          number: Number(deliveryFormik.values.number),
-          complement: deliveryFormik.values.comp
-        }
-      },
-      payment: {
-        card: {
-          name: paymentFormik.values.cardName,
-          number: paymentFormik.values.cardNumber,
-          code: Number(paymentFormik.values.cvv),
-          expires: {
-            month: Number(paymentFormik.values.month),
-            year: Number(paymentFormik.values.year)
-          }
-        }
-      }
-    }
-
-    try {
-      await purchase(purchasePayload).unwrap()
-      alert('Compra confirmada!')
-      closeCart()
-      setCurrentStep('cart')
-    } catch (error) {
-      console.error('Failed to submit purchase:', error)
-    }
+  const renderEnd = () => {
+    return (
+      <>
+        {isSuccess && data ? (
+          <>
+            <h2>Pedido realizado - {data.orderId}</h2>
+            <EndP>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+              <br /> <br />
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+              <br /> <br />
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+              <br /> <br />
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </EndP>
+            <Button onClick={endCart} type="deliver" title="Compra concluída">
+              Concluir
+            </Button>
+          </>
+        ) : (
+          <p>Algo deu errado </p>
+        )}
+      </>
+    )
   }
-
-  const renderEnd = () => (
-    <>
-      <h2>Pedido realizado - ORDER_ID</h2>
-      <EndP>
-        Estamos felizes em informar que seu pedido já está em processo de
-        preparação e, em breve, será entregue no endereço fornecido.
-        <br /> <br />
-        Gostaríamos de ressaltar que nossos entregadores não estão autorizados a
-        realizar cobranças extras.
-        <br /> <br />
-        Lembre-se da importância de higienizar as mãos após o recebimento do
-        pedido, garantindo assim sua segurança e bem-estar durante a refeição.
-        <br /> <br />
-        Esperamos que desfrute de uma deliciosa e agradável experiência
-        gastronômica. Bom apetite!
-      </EndP>
-      <Button
-        onClick={handleConfirmation}
-        type="deliver"
-        title="Compra concluída"
-      >
-        Concluir
-      </Button>
-    </>
-  )
 
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { cores } from '../../../styles'
+import { breakpoints, cores } from '../../../styles'
 import { Card } from '../Product/styles'
 
 export const Container = styled.section`
@@ -17,6 +17,11 @@ export const List = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 32px;
   margin-top: 56px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+    margin: 0 16px;
+  }
 `
 
 export const Title = styled.h2`
@@ -57,6 +62,14 @@ export const ModalContent = styled.div`
   background-color: ${cores.vermelho};
   display: flex;
 
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    padding: 8px;
+  }
+
   header {
     > img {
       position: absolute;
@@ -71,6 +84,12 @@ export const ModalContent = styled.div`
     height: 280px;
     margin: 32px 24px 32px 32px;
     object-fit: fill;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 170px;
+      height: auto;
+      margin: 24px 0 0 56px;
+    }
   }
 
   .content {
@@ -97,7 +116,7 @@ export const ModalContent = styled.div`
     }
 
     button {
-      display: inline-flex;
+      display: flex;
       white-space: nowrap;
       width: auto;
       padding: 4px 7px;

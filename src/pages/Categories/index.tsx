@@ -18,7 +18,7 @@ const Categories = () => {
     }
   }, [restaurante])
   if (!restaurante) {
-    return <h3>Restaurante não encontrado</h3>
+    return <h3>Carregando...</h3>
   }
   return (
     <>
